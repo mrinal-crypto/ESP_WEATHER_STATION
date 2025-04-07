@@ -1,0 +1,180 @@
+.weather-station {
+  background: #110325;
+  height: 305px;
+  position: relative;
+  overflow: hidden;
+}
+.esp-weather-station {
+  color: #00d4ff;
+  text-align: center;
+  font-family: "RobotoCondensed-Bold", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: 10px;
+  width: 1056px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tableValue {
+  position: relative;
+  top: 135px;
+}
+.tem {
+  color: #00ff66;
+  text-align: right;
+  font-family: "RobotoCondensed-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: calc(50% - 186px);
+  top: calc(50% - 354px);
+  width: 170px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.hum {
+  color: #00ff66;
+  text-align: right;
+  font-family: "RobotoCondensed-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: calc(50% - 186px);
+  top: calc(50% - 305px);
+  width: 170px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pre {
+  color: #00ff66;
+  text-align: right;
+  font-family: "RobotoCondensed-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: calc(50% - 186px);
+  top: calc(50% - 256px);
+  width: 170px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.alt {
+  color: #00ff66;
+  text-align: right;
+  font-family: "RobotoCondensed-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: calc(50% - 186px);
+  top: calc(50% - 207px);
+  width: 170px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.temValue {
+  color: #faf203;
+  text-align: left;
+  font-family: "RobotoCondensed-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: calc(50% - -30px);
+  top: calc(50% - 348px);
+  width: 111px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.humValue {
+  color: #faf203;
+  text-align: left;
+  font-family: "RobotoCondensed-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: calc(50% - -30px);
+  top: calc(50% - 299px);
+  width: 111px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.preValue {
+  color: #faf203;
+  text-align: left;
+  font-family: "RobotoCondensed-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: calc(50% - -30px);
+  top: calc(50% - 250px);
+  width: 111px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.altValue {
+  color: #faf203;
+  text-align: left;
+  font-family: "RobotoCondensed-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: calc(50% - -30px);
+  top: calc(50% - 201px);
+  width: 111px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.realTime {
+  text-align: center;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: 63px;
+  width: 337.96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.real-time-span {
+  color: #ff00d0;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+.real-time-span2 {
+  margin-left: 40px;
+  color: #ff00d0;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+.table {
+  height: auto;
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: calc(50% - 362px);
+  overflow: visible;
+}

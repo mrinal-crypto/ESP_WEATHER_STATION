@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--===== CSS =====-->
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <title>Indoor IP</title>
+    </head>
+    <body>
+        <div class="l-form">
+            <form action="" class="form">
+                <h1 class="form__title">Indoor IP Settings</h1>
+
+                <div class="form__div">
+                    <input type="text" class="form__input" placeholder=" " id="ip" required>
+                    <label for="" class="form__label">http://indoor_ip/update</label>
+                </div>
+
+                <input type="submit" class="form__button" value="Submit" onclick="submitForm()">
+            </form>
+        </div>
+
+        <script>
+            function submitForm() {
+              // Add your form submission logic here
+              // For example, you can access form fields by their IDs
+            var indoorIP = document.getElementById("ip").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/Submit", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // Send the values as parameters
+            xhr.send("indoorIP=" + encodeURIComponent(indoorIP));
+
+            // Handle the response
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    alert("Values saved successfully");
+                }
+            };
+
+            }
+        </script>
+    </body>
+</html>

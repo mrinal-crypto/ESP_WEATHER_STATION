@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Station</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="weather-station">
+      <div class="esp-weather-station">ESP WEATHER STATION</div>
+    </div>
+
+    <div class="realTime">
+      <div class="real-time-span" id="date-value">IST - dd.mm.yy</div>
+      <div class="real-time-span2" id="time-value">hh:mm:ss</div>
+    </div>
+
+    <div class="tableValue">
+      <div class="alt">Rel. Altitude (m)</div>
+      <div class="hum">Humidity (%)</div>
+      <div class="pre">Pressure (hPa)</div>
+      <div class="tem">Temperature (C)</div>
+      <div class="altValue" id="alt-Value">00</div>
+      <div class="humValue" id="hum-Value">00</div>
+      <div class="preValue" id="pre-Value">0000.0</div>
+      <div class="temValue" id="tem-Value">00.0</div>
+      <img class="table" src="table.svg" />
+    </div>
+
+    <div class="chartBox">
+      <canvas
+        id="hourlyChart"
+        width="400"
+        height="130"
+        aria-label="Hello ARIA World"
+        role="img"
+      ></canvas>
+    </div>
+
+    <!-- update table values every 2 seconds -->
+    <script>
+      function fetchSensorData() {
+        fetch("/sensor.json") // Call the endpoint that provides JSON data
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("tem-Value").innerText = data.tem;
+            document.getElementById("hum-Value").innerText = data.hum;
+            document.getElementById("pre-Value").innerText = data.pre;
+            document.getElementById("alt-Value").innerText = data.alt;
+          })
+          .catch((error) => console.log("Error fetching data: ", error));
+      }
+      function updateTime() {
+        let now = new Date();
+        // now.setHours(now.getHours() + 5, now.getMinutes() + 30); // Convert to IST (+5:30)
+
+        let day = String(now.getDate()).padStart(2, "0");
+        let month = String(now.getMonth() + 1).padStart(2, "0"); // Months start from 0
+        let year = String(now.getFullYear()).slice(2); // Get last 2 digits of year
+
+        let hours = String(now.getHours()).padStart(2, "0");
+        let minutes = String(now.getMinutes()).padStart(2, "0");
+        let seconds = String(now.getSeconds()).padStart(2, "0");
+
+        let dateString = `IST - ${day}/${month}/${year}`;
+        let timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById("date-value").innerText = dateString;
+        document.getElementById("time-value").innerText = timeString;
+      }
+      setInterval(updateTime, 1000); // Update every second
+      updateTime(); // Call immediately on page load
+      setInterval(fetchSensorData, 2000); // Refresh data every 2 seconds
+    </script>
+
+    <script>
+      const temperature = new Array(48).fill(0);
+      const pressure = new Array(48).fill(0);
+      const humidity = new Array(48).fill(0);
+     
+      //setup
+      const data = {
+        labels: [
+          "00:00",
+          "00:30",
+          "01:00",
+          "01:30",
+          "02:00",
+          "02:30",
+          "03:00",
+          "03:30",
+          "04:00",
+          "04:30",
+          "05:00",
+          "05:30",
+          "06:00",
+          "06:30",
+          "07:00",
+          "07:30",
+          "08:00",
+          "08:30",
+          "09:00",
+          "09:30",
+          "10:00",
+          "10:30",
+          "11:00",
+          "11:30",
+          "12:00",
+          "12:30",
+          "13:00",
+          "13:30",
+          "14:00",
+          "14:30",
+          "15:00",
+          "15:30",
+          "16:00",
+          "16:30",
+          "17:00",
+          "17:30",
+          "18:00",
+          "18:30",
+          "19:00",
+          "19:30",
+          "20:00",
+          "20:30",
+          "21:00",
+          "21:30",
+          "22:00",
+          "22:30",
+          "23:00",
+          "23:30",
+        ],
+
+        datasets: [
+          {
+            label: "TEMPERATURE (°C)",
+            data: temperature,
+            borderColor: "#f50000",
+            backgroundColor: "#f50000",
+            borderWidth: 2,
+          },
+          {
+            label: "PRESSURE (mb)",
+            data: pressure,
+            borderColor: "#32d81c",
+            backgroundColor: "#32d81c",
+            borderWidth: 2,
+          },
+          {
+            label: "HUMIDITY (%)",
+            data: humidity,
+            borderColor: "#2087dd",
+            backgroundColor: "#2087dd",
+            borderWidth: 2,
+          },
+        ],
+      };
+
+      //config
+      const config = {
+        type: "line",
+        data,
+        options: {
+          layout: {
+            padding: 5,
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: "#06ad88",
+                autoSkip: true,
+                maxRotation: 90,
+                minRotation: 90,
+                font: {
+                  size: 11,
+                },
+              },
+              grid: {
+                color: "#242422",
+              },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: "#06ad88",
+                font: {
+                  size: 11,
+                },
+              },
+              grid: {
+                color: "#242422",
+              },
+            },
+          },
+
+          plugins: {
+            title: {
+              display: true,
+              text: "HOURLY WEATHER MONITOR",
+              color: "#e5e7e9",
+              font: {
+                size: 18,
+              },
+            },
+            legend: {
+              labels: {
+                color: "#e5e7e9",
+                font: {
+                  size: 12,
+                  weight: "bold",
+                },
+              },
+            },
+          },
+          animations: {
+            tension: {
+              duration: 500,
+              easing: "linear",
+              from: 0,
+              to: 0.4,
+              loop: false,
+            },
+          },
+        },
+      };
+
+      // const config2 = {
+      //   type: "bar",
+      //   data: data2,
+      //   options: {
+      //     layout: {
+      //       padding: 5,
+      //     },
+      //     scales: {
+      //       x: {
+      //         ticks: {
+      //           color: "#06ad88",
+      //           autoSkip: true,
+      //           maxRotation: 90,
+      //           minRotation: 90,
+      //           font: {
+      //             size: 11,
+      //           },
+      //         },
+      //         grid: {
+      //           color: "#242422",
+      //         },
+      //       },
+      //       y: {
+      //         beginAtZero: true,
+      //         ticks: {
+      //           color: "#06ad88",
+      //           font: {
+      //             size: 11,
+      //           },
+      //         },
+      //         grid: {
+      //           color: "#242422",
+      //         },
+      //       },
+      //     },
+
+      //     plugins: {
+      //       title: {
+      //         display: true,
+      //         text: "DAILY WEATHER MONITOR",
+      //         color: "#e5e7e9",
+      //         font: {
+      //           size: 18,
+      //         },
+      //       },
+      //       legend: {
+      //         labels: {
+      //           color: "#e5e7e9",
+      //           font: {
+      //             size: 12,
+      //             weight: "bold",
+      //           },
+      //         },
+      //       },
+      //     },
+      //     animations: {
+      //       tension: {
+      //         duration: 500,
+      //         easing: "linear",
+      //         from: 0,
+      //         to: 0.4,
+      //         loop: false,
+      //       },
+      //     },
+      //   },
+      // };
+
+      const hourlyChart = new Chart(
+        document.getElementById("hourlyChart"),
+        config,
+        (document.getElementById("hourlyChart").style.backgroundColor =
+          "#110325")
+      );
+    </script>
+
+    <!-- show solid, dotted chart -->
+    <script>
+      // Function to get the current time index
+      function getCurrentTimeIndex(labels) {
+        const now = new Date();
+        const currentTime = `${String(now.getHours()).padStart(
+          2,
+          "0"
+        )}:${String(Math.floor(now.getMinutes() / 30) * 30).padStart(2, "0")}`; // Round to the nearest 30 minutes
+        return labels.indexOf(currentTime);
+      }
+
+      // Function to update the chart with solid and dotted lines for all datasets
+      function updateHourlyChart() {
+        const currentIndex = getCurrentTimeIndex(data.labels);
+
+        // Split the data for temperature, pressure, and humidity
+        const solidTemperature = temperature.slice(0, currentIndex + 1);
+        const dottedTemperature = new Array(currentIndex + 1)
+          .fill(null)
+          .concat(temperature.slice(currentIndex + 1));
+
+        const solidPressure = pressure.slice(0, currentIndex + 1);
+        const dottedPressure = new Array(currentIndex + 1)
+          .fill(null)
+          .concat(pressure.slice(currentIndex + 1));
+
+        const solidHumidity = humidity.slice(0, currentIndex + 1);
+        const dottedHumidity = new Array(currentIndex + 1)
+          .fill(null)
+          .concat(humidity.slice(currentIndex + 1));
+
+        // Update the datasets
+        hourlyChart.data.datasets = [
+          {
+            label: "TEMPERATURE (°C)",
+            data: solidTemperature,
+            borderColor: "#f50000",
+            backgroundColor: "#f50000",
+            borderWidth: 2,
+            borderDash: [], // Solid line
+          },
+          {
+            label: "Last Day",
+            data: dottedTemperature,
+            borderColor: "#f50000",
+            backgroundColor: "#f50000",
+            borderWidth: 2,
+            borderDash: [5, 5], // Dotted line
+          },
+          {
+            label: "PRESSURE (mb)",
+            data: solidPressure,
+            borderColor: "#32d81c",
+            backgroundColor: "#32d81c",
+            borderWidth: 2,
+            borderDash: [], // Solid line
+          },
+          {
+            label: "Last Day",
+            data: dottedPressure,
+            borderColor: "#32d81c",
+            backgroundColor: "#32d81c",
+            borderWidth: 2,
+            borderDash: [5, 5], // Dotted line
+          },
+          {
+            label: "HUMIDITY (%)",
+            data: solidHumidity,
+            borderColor: "#2087dd",
+            backgroundColor: "#2087dd",
+            borderWidth: 2,
+            borderDash: [], // Solid line
+          },
+          {
+            label: "Last Day",
+            data: dottedHumidity,
+            borderColor: "#2087dd",
+            backgroundColor: "#2087dd",
+            borderWidth: 2,
+            borderDash: [5, 5], // Dotted line
+          },
+        ];
+
+        // Refresh the chart
+        hourlyChart.update();
+      }
+
+      // Call the function to update the chart on page load
+      updateHourlyChart();
+    </script>
+
+    <!-- update hourlyChart values -->
+    <script>
+      // Function to fetch historical data from ESP32
+      async function fetchHistoricalData() {
+        try {
+          const response = await fetch("/historical_data");
+          const data = await response.json();
+
+          temperature.fill(0);
+          humidity.fill(0);
+          pressure.fill(0);
+
+          // Update arrays with data from SPIFFS
+          data.forEach((reading, index) => {
+            if (index < 48) {
+              const [temp, hum, pres] = reading.split(",").map(Number);
+              temperature[index] = temp;
+              humidity[index] = hum;
+              pressure[index] = pres;
+            }
+          });
+
+          // Update hourly chart
+
+          updateHourlyChart();
+
+          console.log("Historical data loaded from ESP32");
+        } catch (error) {
+          console.error("Error loading historical data:", error);
+        }
+      }
+    </script>
+
+    <!-- update value and chart every 5 minutes -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {   
+
+        fetchHistoricalData().then(() => {
+          updateHourlyChart();
+        });
+
+        setInterval(() => {
+          fetchHistoricalData().then(() => {
+            updateHourlyChart();
+          });
+        }, 300000); // Every 5 minutes
+      });
+    </script>
+  </body>
+</html>
