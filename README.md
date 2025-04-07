@@ -3,9 +3,9 @@
 ## Project Overview
 An advanced ESP32-based weather monitoring system featuring real-time data visualization, smart alerts, and a professional web interface. The project combines hardware sensors with sophisticated software to create a complete weather monitoring solution.
 
-[![INDOOR STATION OVERVIEW](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID/0.jpg)](https://youtu.be/ii6bUGy8SsA)
-[![OUTDOOR STATION OVERVIEW](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID/0.jpg)](https://youtu.be/wlFzJBN7o1E)
-[![WEB INTERFACE OVERVIEW](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID/0.jpg)](https://youtu.be/QYNjywD-fMI)
+[![INDOOR STATION OVERVIEW]](https://youtu.be/FWNLf3Usslo)
+[![OUTDOOR STATION OVERVIEW]](https://youtu.be/wlFzJBN7o1E)
+[![WEB INTERFACE OVERVIEW]](https://youtu.be/QYNjywD-fMI)
 
 ## Key Features
 ### Hardware Integration
