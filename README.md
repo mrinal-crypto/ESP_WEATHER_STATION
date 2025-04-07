@@ -3,6 +3,9 @@
 ## Project Overview
 An advanced ESP32-based weather monitoring system featuring real-time data visualization, smart alerts, and a professional web interface. The project combines hardware sensors with sophisticated software to create a complete weather monitoring solution.
 
+[![Weather Station Overview](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID)
+
+
 ## Key Features
 ### Hardware Integration
 - ST7920 128x64 LCD Display for crisp data visualization 
@@ -81,5 +84,3 @@ The modular design allows for easy addition of:
 This project demonstrates professional-grade integration of hardware and software components, creating a reliable and feature-rich weather monitoring system suitable for both home and educational use.
 
 [The project is open source and available for contributions and improvements]
-
-[Consider adding photos/screenshots of your working project to make it even more impressive!]
