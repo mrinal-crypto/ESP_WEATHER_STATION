@@ -14,7 +14,6 @@
 
 #define BUZ 12
 #define DATA_PIN 21
-#define ADJUST_BRIGHTNESS 14
 #define NUM_LEDS 4
 #define CHIPSET WS2812
 #define BRIGHTNESS 50
@@ -38,20 +37,11 @@ const unsigned long ALERT_COOLDOWN = 600000;  // 10 minutes between alerts
 AsyncWebServer server(80);
 CRGB leds[NUM_LEDS];
 
-void tostring();
-void wifiSignalQuality();
-void connectWiFi();
-void printLocalTime();
-void welcomeMsg();
-void clearLCD();
-
 U8G2_ST7920_128X64_F_SW_SPI u8g2(U8G2_R0, 18, 23, 5, 22);  //for full buffer mode
 
 const char *ntpServer = "pool.ntp.org";
 const long gmtOffset_sec = 19800;
 const int daylightOffset_sec = 0;
-unsigned long previousMillis = 0;
-const long buzzerDuration = 200;
 uint8_t wifiRSSI = 0;
 String ssid = "";
 float temperature = 0.0;
@@ -62,7 +52,6 @@ float altitude = 0.0;
 float tem[HOURLY_ARRAY_LENGTH] = { 0 };
 float hum[HOURLY_ARRAY_LENGTH] = { 0 };
 float pre[HOURLY_ARRAY_LENGTH] = { 0 };
-int currentIndex = 0;
 bool dataSaved = false;
 
 int signalQuality[] = { 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99,
